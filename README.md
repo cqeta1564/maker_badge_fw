@@ -16,8 +16,7 @@ My used fonts are from the same library/family. More info on https://learn.adafr
 ## Add support for ESP-Now
 Communicate between a group of badges and sync color of the leds. This is not point-to-point communication!
 ### Lines in "main.cpp" with this feature
-18
-19
+18 - 19
 40
 57
 119 - 121
