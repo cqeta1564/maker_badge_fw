@@ -1,5 +1,5 @@
 # Cqeta1564's update
-Hi, I added a few new things to code from @Yourigh. Feel free to use and make it even more great.
+Hi, I added a few new things to code from [@Yourigh](https://github.com/Yourigh). If you want more info look at (original Jurajs' repository)[https://github.com/Yourigh/maker_badge_fw]. Feel free to use and make it even more great.
 
 ## Add support for pictures
 Add "bitmaps.h" with bitmaps for pictures.
