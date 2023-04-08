@@ -1,4 +1,5 @@
 # Cqeta1564's update
+Hi, I added a few new things to code from @Yourigh. Feel free to use and make it even more great.
 ## Add support for pictures
 Add "bitmaps.h" with bitmaps for pictures.
 ### Lines in "main.cpp" with this feature
@@ -8,13 +9,13 @@ Add "bitmaps.h" with bitmaps for pictures.
 
 ## Add support for more fonts
 My used fonts are from the same library/family. More info on https://learn.adafruit.com/adafruit-gfx-graphics-library/using-fonts.
-### Linesin "main.cpp" with this feature
+### Lines in "main.cpp" with this feature
 16
 241
 
 ## Add support for ESP-Now
 Communicate between a group of badges and sync color of the leds. This is not point-to-point communication!
-### Linesin "main.cpp" with this feature
+### Lines in "main.cpp" with this feature
 18
 19
 40
