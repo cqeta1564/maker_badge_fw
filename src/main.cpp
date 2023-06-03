@@ -1,5 +1,8 @@
 /*
-Juraj Repcik
+Matyas Potocky
+and big thanks to Juraj Repcik
+
+The ESP-Now is NOT point-to-point and its NOT encrypted. BE AWARE OF THAT.
 
 Before compiling, create config.h (copy and edit config_template.h). 
 */
