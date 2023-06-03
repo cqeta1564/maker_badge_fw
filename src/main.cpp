@@ -151,7 +151,7 @@ void DisplayMenu(void){
     display.print("   Maker Badge Menu");
     display.drawBitmap(0, 0, smile, 19, 19, GxEPD_BLACK); //POZOR NA 4 A 5 PROMENOU MUSI TAM BYT VELIKOST OBRAZKU
     display.setCursor(0, 39);
-    display.printf("   1. Home Assistant\n\n   2. Badge\n\n   3. FW update\n   4. ESP-Now");
+    display.printf("   1. Home Assistant\n   2. Badge\n   3. FW update\n   4. ESP-Now");
     display.fillRect(0,20,250,2,GxEPD_BLACK);
     display.fillRect(0,DISP_Y-2,BattBar,2,GxEPD_BLACK);
   } while (display.nextPage());
@@ -321,28 +321,24 @@ void receiveCallback(const uint8_t *macAddr, const uint8_t *data, int dataLen)
  
   // Send Debug log message to the serial port
   Serial.printf("Received message from: %s - %s\n", macStr, buffer);
- 
-  // Check switch status
-  if (strcmp("red", buffer) == 0) // If "str1" == "str2" => 0
-  {
-    leds[0] = CRGB(255,0,0); //LED Red
-    FastLED.show();
+
+  String hexstring = buffer;
+  int number = (int) strtol( &hexstring[1], NULL, 16);
+  int r = number >> 16;
+  int g = number >> 8 & 0xFF;
+  int b = number & 0xFF;
+
+  if (serialdbg == 1){
+  Serial.print("red is ");
+  Serial.println(r);
+  Serial.print("green is ");
+  Serial.println(g);
+  Serial.print("blue is ");
+  Serial.println(b);
   }
-  else if (strcmp("green", buffer) == 0) // If "str1" == "str2" => 0
-  {
-    leds[0] = CRGB(0,255,0); //LED Green
-    FastLED.show();
-  }
-  else if (strcmp("blue", buffer) == 0) // If "str1" == "str2" => 0
-  {
-    leds[0] = CRGB(0,0,255); //LED Blue
-    FastLED.show();
-  }
-  else if (strcmp("off", buffer) == 0) // If "str1" == "str2" => 0
-  {
-    leds[0] = CRGB(0,0,0); //LED Off
-    FastLED.show();
-  }
+
+  leds[0] = CRGB(r,g,b);
+  FastLED.show();
 }
 
 void sentCallback(const uint8_t *macAddr, esp_now_send_status_t status)
@@ -456,40 +452,80 @@ void ESP_Now(void){
 
   // Loop
   while(1){
+  String hexstring = LED1;
+  int number = (int) strtol( &hexstring[1], NULL, 16);
+  int r = number >> 16;
+  int g = number >> 8 & 0xFF;
+  int b = number & 0xFF;
+
+  String hexstring2 = LED2;
+  int number2 = (int) strtol( &hexstring2[1], NULL, 16);
+  int rr = number2 >> 16;
+  int gg = number2 >> 8 & 0xFF;
+  int bb = number2 & 0xFF;
+
+  String hexstring3 = LED3;
+  int number3 = (int) strtol( &hexstring3[1], NULL, 16);
+  int rrr = number3 >> 16;
+  int ggg = number3 >> 8 & 0xFF;
+  int bbb = number3 & 0xFF;
+
+  String hexstring4 = LED4;
+  int number4 = (int) strtol( &hexstring4[1], NULL, 16);
+  int rrrr = number4 >> 16;
+  int gggg = number4 >> 8 & 0xFF;
+  int bbbb = number4 & 0xFF;
+
+  String hexstring5 = LED5;
+  int number5 = (int) strtol( &hexstring5[1], NULL, 16);
+  int rrrrr = number5 >> 16;
+  int ggggg = number5 >> 8 & 0xFF;
+  int bbbbb = number5 & 0xFF;
+
     delay(150);
     // Transmit
     switch(readTouchPins()){
-      case 0b00001: //1. Button => Red
+      case 0b00001: //1. Button
         Serial.println("1. BTN");
-        broadcast("red");
-        leds[0] = CRGB(255,0,0); // LED Red
+        broadcast(LED1);
+        leds[0] = CRGB(r,g,b); // LED1
         FastLED.show();
         break;
-      case 0b00010: //2. Button => Green
+      case 0b00010: //2. Button
         Serial.println("2. BTN");
-        broadcast("green");
-        leds[0] = CRGB(0,255,0); //LED Green
+        broadcast(LED2);
+        leds[0] = CRGB(rr,gg,bb); //LED2
         FastLED.show();
         break;
-      case 0b00100: //3. Button => Blue
+      case 0b00100: //3. Button
         Serial.println("3. BTN");
-        broadcast("blue");
-        leds[0] = CRGB(0,0,255); //LED Blue
+        broadcast(LED3);
+        leds[0] = CRGB(rrr,ggg,bbb); //LED3
         FastLED.show();
         break;
-      case 0b01000: //4. Button => Off
+      case 0b01000: //4. Button
         Serial.println("4. BTN");
-        broadcast("off");
-        leds[0] = CRGB(0,0,0); //LED Off
+        broadcast(LED4);
+        leds[0] = CRGB(rrrr,gggg,bbbb); //LED4
+        FastLED.show();
+        break;
+      case 0b10000: //5. Button
+        Serial.println("4. BTN");
+        broadcast(LED5);
+        leds[0] = CRGB(rrrrr,ggggg,bbbbb); //LED5
         FastLED.show();
         break;
       default:
+        if (serialdbg == 1){
         Serial.println(" Do nothing, only repeat switch 4 read BTN");
+        }
         break;  
       Serial.println(" BAF!"); // Never ever :) Pocuvaj, henty text nikedy neuvidis.
     }
     // Recive
+    if (serialdbg == 1){
     Serial.println("repeat while and wait 4 push BTN or RECEIVE");
+    }
   }
   Serial.println("vyskocil????");
 }
