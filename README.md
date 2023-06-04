@@ -7,17 +7,11 @@ You can find full guide in the original repo.
 2. rename "config_template.h" to "config.h" and fill it in
 3. upload it to the badge
 
+## Add support for ESP-Now
+Communicate with all badges in range and share your favorite color with them. Set up to five colors in "config.h" file in hex form. You can call the color with touch buttons. This is not point-to-point communication! This is not encrypted communication! Do not share any passwords or personal information!
+
 ## Add support for pictures
 Add "bitmaps.h" with bitmaps for pictures.
-##### Lines in "main.cpp" with this feature
-9, 146, 232 - 233
 
 ## Add support for more fonts
 My used fonts are from the same library/family. More info on https://learn.adafruit.com/adafruit-gfx-graphics-library/using-fonts.
-##### Lines in "main.cpp" with this feature
-16, 241
-
-## Add support for ESP-Now
-Communicate between a group of badges and sync color of the leds. This is not point-to-point communication!
-##### Lines in "main.cpp" with this feature
-18 - 19, 40, 57, 119 - 121, 154, 174 - 176, 298 - 495
