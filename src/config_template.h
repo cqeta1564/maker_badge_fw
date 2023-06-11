@@ -5,8 +5,8 @@
 //#define MakerBadgeVersionD
 
 //CREDENTIALS
-#define mySSID "626-2.4rb"
-#define myPASSWORD "12345678"
+#define mySSID "SSID NAME"
+#define myPASSWORD "PASWD"
 
 //HOME ASSISTANT SETUP
 /*
